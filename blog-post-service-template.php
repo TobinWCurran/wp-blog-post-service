@@ -1,8 +1,10 @@
-<html>
-	<head>
-		
-	</head>
-	<body>
-		<h1>Here I am!</h1>
-	</body>
-</html>
+<?php
+    header('Content-Type: application/json');
+    $args = array(
+        'post_type' => 'post'
+    );
+
+    $query = new WP_Query($args);
+
+    echo json_encode($query);
+?>

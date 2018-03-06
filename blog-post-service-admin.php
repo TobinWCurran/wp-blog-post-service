@@ -178,18 +178,25 @@ class blog_post_service_admin{
 		
 		//if ($post->post_type == "blog_post_service"){
 			if(file_exists(plugin_dir_path( __FILE__ ). 'blog-post-service-template.php')){
-				echo '<h3>' . plugin_dir_path( __FILE__ ) . 'blog-post-service-template.php </h3>';
-				
-				
-				//	$path		(string) (optional) Path relative to the site url.
-				//				Default: None
-				//	$scheme		(string) (optional)
-				//				Scheme to give the site url context. Currently 'http', 'https', 'login', 'login_post', 'admin' or 'relative'.
-				//				Default: null
-				
-				$path = '';
-				$scheme = null;
-				echo '<h3>' . get_site_url( $slugID, $path, $scheme ) . '/' . $slugName . '</h3>';
+				echo '<p>' . plugin_dir_path( __FILE__ ) . 'blog-post-service-template.php </p>';
+
+
+                ?>
+                    <table class="form-table">
+                        <tbody>
+                        <tr>
+                            <th scope="row">
+                                Service URL
+                            </th>
+                            <td>
+                                <?php
+                                    echo '<a href="' . get_permalink( $slugID) . '" target="_blank">' . get_permalink( $slugID) .  '<a>';
+                                ?>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                <?php
 			}else{
 				echo 'Nope';
 			}
@@ -265,9 +272,12 @@ class blog_post_service_admin{
 			</p>
 		<?php
 	}
-	
-	public function blog_parts_callback($args){
-		$checked;
+
+    /**
+     * @param $args
+     */
+    public function blog_parts_callback($args){
+		$checked = '';
 		$partID = $args['partID'];
 		$wordpressKey = $args['wordpressKey'];
 		$settingFieldID = 'blog_post_service_' . $partID; //<-----------------CHANGE THIS ONE
